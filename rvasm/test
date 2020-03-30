@@ -1,0 +1,30 @@
+fib:
+	addi x2,x2,-24
+	sd x11,8(x2)
+	sd x1,0(x2)
+	
+	bne x11,x0,else1
+	addi x10,x0,0
+	ld x1,0(x2)
+	addi x2,x2,24
+	jalr x0,0(x1)
+else1:
+	addi x10,x0,1
+	bne x11,x10,else2
+	ld x1,0(x2)
+	addi x2,x2,24
+	jalr x0,0(x1)
+else2:
+	ld x11,8(x2)
+	addi x11,x11,-1
+	jal x1,fib
+	sd x10,16(x2)
+	
+	ld x11,8(x2)
+	addi x11,x11,-2
+	jal x1,fib
+	ld x5,16(x2)
+	add x10, x10, x5
+	ld x1,0(x2)
+	addi x2,x2,24
+	jalr x0,0(x1)
